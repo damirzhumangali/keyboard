@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUREL No. 65 | Limited Edition 2024</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #080808;
+            --panel: #0d0d0d;
+            --panel-soft: rgba(16, 16, 16, 0.82);
+            --gold: #c9a96e;
+            --text: #f0ede8;
+            --muted: #888888;
+            --line: rgba(201, 169, 110, 0.38);
+            --line-strong: rgba(201, 169, 110, 0.68);
+            --shadow: rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            background: var(--bg);
+            scroll-behavior: auto;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-weight: 300;
+            font-synthesis-weight: none;
+            text-rendering: optimizeLegibility;
+        }
+
+        img,
+        canvas {
+            display: block;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .progress-meter {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(201, 169, 110, 0.12);
+            z-index: 80;
+            pointer-events: none;
+        }
+
+        .progress-meter__fill {
+            width: 100%;
+            height: 100%;
+            transform: scaleX(0);
+            transform-origin: left center;
+            background: linear-gradient(
+                90deg,
+                rgba(201, 169, 110, 0.18) 0%,
+                rgba(201, 169, 110, 0.94) 52%,
+                rgba(240, 237, 232, 0.92) 100%
+            );
+            box-shadow: 0 0 18px rgba(201, 169, 110, 0.35);
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: clamp(2rem, 4vw, 3rem);
+            isolation: isolate;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(201, 169, 110, 0.085) 0.5px, transparent 0.5px),
+                linear-gradient(90deg, rgba(201, 169, 110, 0.085) 0.5px, transparent 0.5px);
+            background-size: 72px 72px;
+            opacity: 0.72;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 50% 24%, rgba(201, 169, 110, 0.12), transparent 38%),
+                linear-gradient(180deg, rgba(8, 8, 8, 0.08) 0%, rgba(8, 8, 8, 0.82) 74%, rgba(8, 8, 8, 1) 100%);
+            z-index: -1;
+        }
+
+        .hero__inner {
+            position: relative;
+            z-index: 1;
+            width: min(1120px, 100%);
+            text-align: center;
+        }
+
+        .eyebrow {
+            margin-bottom: 2.4rem;
+            font-family: "DM Mono", "Courier New", monospace;
+            font-size: 0.73rem;
+            font-weight: 300;
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .hero__title {
+            margin: 0 auto 1.5rem;
+            max-width: 10.5ch;
+            font-size: clamp(4.2rem, 10.8vw, 9.4rem);
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            text-wrap: balance;
+        }
+
+        .hero__title em,
+        .section-title em,
+        .feature-panel h3 em,
+        .cta__title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero__copy,
+        .hero__detail,
+        .feature-panel p,
+        .section-copy,
+        .spec-table,
+        .cta__copy,
+        .scroll-cue__label,
+        .loading-panel__kicker,
+        .loading-panel__meta {
+            font-family: "DM Mono", "Courier New", monospace;
+            font-weight: 300;
+        }
+
+        .hero__copy {
+            margin: 0 auto;
+            max-width: 58ch;
+            font-size: 0.83rem;
+            line-height: 1.95;
+            color: var(--muted);
+            text-wrap: pretty;
+        }
+
+        .hero__detail {
+            margin-top: 1.8rem;
+            color: rgba(240, 237, 232, 0.62);
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            left: 50%;
+            bottom: clamp(1.5rem, 4vw, 2.7rem);
+            z-index: 1;
+            display: grid;
+            justify-items: center;
+            gap: 0.75rem;
+            transform: translateX(-50%);
+            animation: pulse 2.8s ease-in-out infinite;
+        }
+
+        .scroll-cue__label {
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(240, 237, 232, 0.48);
+            white-space: nowrap;
+        }
+
+        .scroll-cue__line {
+            width: 1px;
+            height: 38px;
+            background: rgba(201, 169, 110, 0.8);
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 0.35;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        .story-section {
+            position: relative;
+            height: 500vh;
+        }
+
+        .story-stage {
+            position: sticky;
+            top: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 0;
+            overflow: hidden;
+            background: var(--bg);
+        }
+
+        .story-stage::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(201, 169, 110, 0.08), transparent 42%),
+                radial-gradient(circle at 50% 0%, rgba(201, 169, 110, 0.05), transparent 38%);
+            pointer-events: none;
+        }
+
+        .story-shell {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #keyboard-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .story-notes {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .story-note {
+            position: absolute;
+            font-family: "DM Mono", "Courier New", monospace;
+            font-size: 0.64rem;
+            font-weight: 300;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: rgba(240, 237, 232, 0.32);
+        }
+
+        .story-note--left {
+            top: 1.2rem;
+            left: 0;
+        }
+
+        .story-note--right {
+            right: 0;
+            bottom: 1.2rem;
+            text-align: right;
+        }
+
+        .overlay-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .overlay-card {
+            position: absolute;
+            width: min(22rem, calc(100vw - 3rem));
+            padding: 1.5rem;
+            border: 0.5px solid var(--line-strong);
+            background: rgba(12, 12, 12, 0.56);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.26);
+            opacity: var(--card-opacity, 0);
+            transform: translate3d(var(--card-shift, 0px), calc(-50% + var(--card-drift, 0px)), 0);
+            will-change: opacity, transform;
+            contain: layout paint;
+            backface-visibility: hidden;
+        }
+
+        .overlay-card[data-side="left"] {
+            left: clamp(0rem, 3vw, 2.5rem);
+        }
+
+        .overlay-card[data-side="right"] {
+            right: clamp(0rem, 3vw, 2.5rem);
+        }
+
+        .overlay-card__kicker {
+            margin-bottom: 0.8rem;
+            font-family: "DM Mono", "Courier New", monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: rgba(201, 169, 110, 0.88);
+        }
+
+        .overlay-card h3 {
+            margin-bottom: 1rem;
+            font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+            font-weight: 300;
+            line-height: 0.96;
+            color: var(--text);
+        }
+
+        .overlay-card p {
+            margin-bottom: 1rem;
+            font-family: "DM Mono", "Courier New", monospace;
+            font-size: 0.74rem;
+            line-height: 1.85;
+            color: rgba(240, 237, 232, 0.72);
+        }
+
+        .overlay-card__specs {
+            display: grid;
+            gap: 0.72rem;
+        }
+
+        .overlay-card__row {
+            display: grid;
+            grid-template-columns: 6rem 1fr;
+            gap: 0.9rem;
+            padding-top: 0.72rem;
+            border-top: 0.5px solid rgba(201, 169, 110, 0.18);
+        }
+
+        .overlay-card__row span:first-child {
+            color: rgba(240, 237, 232, 0.42);
+            font-family: "DM Mono", "Courier New", monospace;
+            font-size: 0.64rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .overlay-card__row span:last-child {
+            color: var(--text);
+            font-family: "DM Mono", "Courier New", monospace;
+            font-size: 0.74rem;
+            line-height: 1.55;
+        }
+
+        .section {
+            padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 4vw, 3rem);
+        }
+
+        .section-frame {
+            border-top: 0.5px solid var(--line);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1px;
+            background: rgba(201, 169, 110, 0.18);
+            border-top: 0.5px solid rgba(201, 169, 110, 0.2);
+            border-bottom: 0.5px solid rgba(201, 169, 110, 0.2);
+        }
+
+        .feature-panel {
+            min-height: 22rem;
+            padding: clamp(1.5rem, 4vw, 2.6rem);
+            background: var(--panel);
+            display: grid;
+            align-content: space-between;
+            gap: 1.4rem;
+        }
+
+        .feature-number {
+            color: rgba(201, 169, 110, 0.28);
+            font-size: clamp(4rem, 8vw, 6.4rem);
+            line-height: 0.8;
+        }
+
+        .feature-panel h3 {
+            max-width: 9ch;
+            font-size: clamp(2rem, 4.4vw, 3.7rem);
+            font-weight: 300;
+            line-height: 0.94;
+            letter-spacing: -0.03em;
+        }
+
+        .feature-panel p {
+            max-width: 34ch;
+            font-size: 0.74rem;
+            line-height: 1.9;
+            color: var(--muted);
+        }
+
+        .spec-section {
+            border-top: 0.5px solid var(--line);
+        }
+
+        .spec-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+            gap: clamp(2.5rem, 6vw, 6rem);
+            align-items: start;
+        }
+
+        .section-label {
+            margin-bottom: 1rem;
+            font-family: "DM Mono", "Courier New", monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .section-title {
+            margin-bottom: 1.2rem;
+            max-width: 8ch;
+            font-size: clamp(3.4rem, 7vw, 6.2rem);
+            font-weight: 300;
+            line-height: 0.92;
+            letter-spacing: -0.04em;
+            text-wrap: balance;
+        }
+
+        .section-copy {
+            max-width: 40ch;
+            font-size: 0.78rem;
+            line-height: 1.9;
+            color: var(--muted);
+        }
+
+        .spec-table {
+            border-top: 0.5px solid var(--line);
+            border-left: 0.5px solid var(--line);
+            border-right: 0.5px solid var(--line);
+        }
+
+        .spec-row {
+            display: grid;
+            grid-template-columns: 11rem 1fr;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            border-bottom: 0.5px solid var(--line);
+        }
+
+        .spec-row__label {
+            color: rgba(240, 237, 232, 0.48);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .spec-row__value {
+            color: var(--text);
+        }
+
+        .cta {
+            position: relative;
+            min-height: 90vh;
+            display: grid;
+            place-items: center;
+            padding: clamp(4.5rem, 10vw, 8rem) clamp(1.25rem, 4vw, 3rem);
+            border-top: 0.5px solid var(--line);
+            overflow: hidden;
+        }
+
+        .cta__watermark {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(6rem, 22vw, 18rem);
+            line-height: 0.8;
+            letter-spacing: 0.16em;
+            color: rgba(240, 237, 232, 0.035);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .cta__content {
+            position: relative;
+            z-index: 1;
+            width: min(680px, 100%);
+            text-align: center;
+        }
+
+        .cta__title {
+            margin-bottom: 1rem;
+            font-size: clamp(3.3rem, 7vw, 6rem);
+            font-weight: 300;
+            line-height: 0.94;
+            letter-spacing: -0.04em;
+            text-wrap: balance;
+        }
+
+        .cta__copy {
+            margin: 0 auto 2rem;
+            max-width: 48ch;
+            font-size: 0.8rem;
+            line-height: 1.9;
+            color: var(--muted);
+        }
+
+        .cta__button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 13rem;
+            padding: 0.95rem 1.6rem;
+            border: 0.5px solid var(--line-strong);
+            background: transparent;
+            color: var(--gold);
+            font-family: "DM Mono", "Courier New", monospace;
+            font-size: 0.72rem;
+            font-weight: 300;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            transition: background-color 220ms ease, color 220ms ease, transform 220ms ease;
+            cursor: pointer;
+        }
+
+        .cta__button:hover,
+        .cta__button:focus-visible {
+            background: rgba(201, 169, 110, 0.08);
+            color: var(--text);
+            transform: translateY(-1px);
+            outline: none;
+        }
+
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 120;
+            display: grid;
+            place-items: center;
+            background: rgba(8, 8, 8, 0.96);
+            transition: opacity 500ms ease, visibility 500ms ease;
+        }
+
+        .loading-screen.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loading-panel {
+            width: min(26rem, calc(100vw - 2.5rem));
+            padding: 1.7rem;
+            border: 0.5px solid rgba(201, 169, 110, 0.26);
+            background: rgba(12, 12, 12, 0.86);
+        }
+
+        .loading-panel__kicker {
+            margin-bottom: 0.6rem;
+            color: var(--gold);
+            font-size: 0.66rem;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+        }
+
+        .loading-panel__title {
+            margin-bottom: 1.2rem;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 300;
+            line-height: 0.96;
+            color: var(--text);
+        }
+
+        .loading-track {
+            width: 100%;
+            height: 1px;
+            background: rgba(201, 169, 110, 0.18);
+            overflow: hidden;
+        }
+
+        .loading-track__fill {
+            width: 100%;
+            height: 100%;
+            transform: scaleX(0);
+            transform-origin: left center;
+            background: rgba(201, 169, 110, 0.94);
+        }
+
+        .loading-panel__meta {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            color: rgba(240, 237, 232, 0.5);
+            font-size: 0.67rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        @media (max-width: 1180px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .overlay-card {
+                width: min(20rem, calc(100vw - 3rem));
+            }
+        }
+
+        @media (max-width: 900px) {
+            .overlay-card {
+                left: 50% !important;
+                right: auto !important;
+                top: auto !important;
+                bottom: 1rem;
+                transform: translate3d(calc(-50% + var(--card-shift, 0px)), var(--card-drift, 0px), 0);
+            }
+
+            .story-note--left,
+            .story-note--right {
+                inset: auto auto 0 50%;
+                transform: translateX(-50%);
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            .story-note--left {
+                bottom: 5.3rem;
+            }
+
+            .story-note--right {
+                bottom: 4rem;
+            }
+
+            .spec-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero__title {
+                max-width: 8ch;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .spec-row {
+                grid-template-columns: 1fr;
+                gap: 0.4rem;
+            }
+
+            .cta__watermark {
+                font-size: clamp(4rem, 24vw, 7rem);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .scroll-cue {
+                animation: none;
+            }
+
+            .cta__button {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-meter" aria-hidden="true">
+        <div class="progress-meter__fill" id="progress-fill"></div>
+    </div>
+
+    <header class="hero">
+        <div class="hero__inner">
+            <p class="eyebrow">Limited Edition · 2024</p>
+            <h1 class="hero__title">Silence, <em>machined</em> into a statement.</h1>
+            <p class="hero__copy">
+                AUREL No. 65 turns mechanical precision into quiet theatre. Every layer is tuned for resonance,
+                flex, and mass, then revealed one decision at a time through a scroll-bound exploded study.
+            </p>
+            <p class="hero__detail">CNC aluminum shell · gasket-isolated architecture · hot-swap core</p>
+        </div>
+        <div class="scroll-cue" aria-hidden="true">
+            <span class="scroll-cue__label">Scroll to reveal</span>
+            <span class="scroll-cue__line"></span>
+        </div>
+    </header>
+
+    <section class="story-section" id="story-section" aria-label="Exploded keyboard assembly animation">
+        <div class="story-stage">
+            <div class="story-shell">
+                <canvas id="keyboard-canvas" role="img" aria-label="Exploded mechanical keyboard animation controlled by scroll position."></canvas>
+                <div class="story-notes" aria-hidden="true">
+                    <p class="story-note story-note--left">Exploded Study</p>
+                    <p class="story-note story-note--right">Frame-mapped to scroll</p>
+                </div>
+                <div class="overlay-layer" id="overlay-layer"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-frame" aria-labelledby="feature-title">
+        <h2 class="sr-only" id="feature-title">Feature Grid</h2>
+        <div class="feature-grid">
+            <article class="feature-panel">
+                <span class="feature-number">01</span>
+                <h3>Gasket <em>Mount</em></h3>
+                <p>Poron-isolated contact points suspend the typing surface for a softer downstroke and a cleaner, lower resonance profile.</p>
+            </article>
+            <article class="feature-panel">
+                <span class="feature-number">02</span>
+                <h3>Hot-Swap <em>Core</em></h3>
+                <p>Mill-max style sockets let the board move between linear, tactile, and silent builds without soldering or downtime.</p>
+            </article>
+            <article class="feature-panel">
+                <span class="feature-number">03</span>
+                <h3>Per-Key <em>RGB</em></h3>
+                <p>South-facing lighting is tuned for diffusion, not spectacle, giving every legend a calm, architectural glow.</p>
+            </article>
+            <article class="feature-panel">
+                <span class="feature-number">04</span>
+                <h3>QMK <em>Native</em></h3>
+                <p>Firmware-level remapping, layered workflows, and macro logic remain local, transparent, and fully under the owner’s control.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section spec-section" aria-labelledby="spec-title">
+        <div class="spec-layout">
+            <div>
+                <p class="section-label">Specifications</p>
+                <h2 class="section-title" id="spec-title">Engineering with <em>restraint</em>.</h2>
+                <p class="section-copy">
+                    Every measurement exists to support feel. The board carries its mass low, keeps the plate isolated,
+                    and leaves enough openness in the stack for sound to bloom without turning sharp.
+                </p>
+            </div>
+            <div class="spec-table" role="table" aria-label="Mechanical keyboard specifications">
+                <div class="spec-row" role="row">
+                    <span class="spec-row__label" role="rowheader">Layout</span>
+                    <span class="spec-row__value" role="cell">65% / 67-key</span>
+                </div>
+                <div class="spec-row" role="row">
+                    <span class="spec-row__label" role="rowheader">Case Material</span>
+                    <span class="spec-row__value" role="cell">CNC 6063 aluminum with internal brass weight</span>
+                </div>
+                <div class="spec-row" role="row">
+                    <span class="spec-row__label" role="rowheader">Plate</span>
+                    <span class="spec-row__value" role="cell">1.5 mm flex-cut POM</span>
+                </div>
+                <div class="spec-row" role="row">
+                    <span class="spec-row__label" role="rowheader">Mount System</span>
+                    <span class="spec-row__value" role="cell">Poron isolated gasket mount</span>
+                </div>
+                <div class="spec-row" role="row">
+                    <span class="spec-row__label" role="rowheader">PCB Type</span>
+                    <span class="spec-row__value" role="cell">1.2 mm hot-swap PCB with south-facing RGB</span>
+                </div>
+                <div class="spec-row" role="row">
+                    <span class="spec-row__label" role="rowheader">Weight</span>
+                    <span class="spec-row__value" role="cell">1.92 kg assembled</span>
+                </div>
+                <div class="spec-row" role="row">
+                    <span class="spec-row__label" role="rowheader">Connectivity</span>
+                    <span class="spec-row__value" role="cell">USB-C / 2.4 GHz</span>
+                </div>
+                <div class="spec-row" role="row">
+                    <span class="spec-row__label" role="rowheader">Polling Rate</span>
+                    <span class="spec-row__value" role="cell">8000 Hz wired</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+        <div class="cta__watermark" aria-hidden="true">AUREL</div>
+        <div class="cta__content">
+            <p class="section-label">Allocation</p>
+            <h2 class="cta__title" id="cta-title">Reserve the first <em>hundred</em>.</h2>
+            <p class="cta__copy">
+                Built as a short-run object for collectors who care about sound, mass, and machining as much as they care about speed.
+            </p>
+            <button class="cta__button" type="button">Reserve Now</button>
+        </div>
+    </section>
+
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-panel">
+            <p class="loading-panel__kicker">Loading Sequence</p>
+            <h2 class="loading-panel__title">Preparing the exploded view.</h2>
+            <div class="loading-track" aria-hidden="true">
+                <div class="loading-track__fill" id="loading-fill"></div>
+            </div>
+            <div class="loading-panel__meta">
+                <span id="loading-batch">Batch 00 / 00</span>
+                <span id="loading-progress">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CARD_DATA = [
+            {
+                id: 'top-frame',
+                side: 'left',
+                top: '32%',
+                range: [0.12, 0.29],
+                kicker: 'Layer I',
+                title: 'Top Frame',
+                description: 'The outer shell is tuned like jewelry: tight radii, softened edges, and enough mass to make the board feel carved rather than assembled.',
+                specs: [
+                    ['Material', 'CNC 6063 aluminum'],
+                    ['Thickness', '9.8 mm bezel'],
+                    ['Mount', 'Tongue-and-groove alignment']
+                ]
+            },
+            {
+                id: 'switch-plate',
+                side: 'right',
+                top: '40%',
+                range: [0.28, 0.46],
+                kicker: 'Layer II',
+                title: 'Switch Plate',
+                description: 'A flex-cut POM plate softens the initial contact point, leaving the board responsive without turning vague or springy.',
+                specs: [
+                    ['Material', 'POM composite'],
+                    ['Thickness', '1.5 mm'],
+                    ['Mount', 'Isolated gasket interface']
+                ]
+            },
+            {
+                id: 'pcb',
+                side: 'left',
+                top: '48%',
+                range: [0.45, 0.63],
+                kicker: 'Layer III',
+                title: 'PCB',
+                description: 'The electrical core keeps signal paths short and clean while preserving hot-swap freedom, per-key RGB, and native firmware control.',
+                specs: [
+                    ['Material', '5-layer FR4'],
+                    ['Thickness', '1.2 mm'],
+                    ['Mount', 'Hot-swap / QMK native']
+                ]
+            },
+            {
+                id: 'gasket-foam',
+                side: 'right',
+                top: '56%',
+                range: [0.62, 0.8],
+                kicker: 'Layer IV',
+                title: 'Gasket Foam',
+                description: 'Poron dampening strips regulate contact pressure between plate and shell, balancing rebound, tone, and long-session comfort.',
+                specs: [
+                    ['Material', 'Poron foam'],
+                    ['Thickness', '3.5 mm'],
+                    ['Mount', 'Compression tuned']
+                ]
+            },
+            {
+                id: 'bottom-case',
+                side: 'left',
+                top: '64%',
+                range: [0.79, 0.96],
+                kicker: 'Layer V',
+                title: 'Bottom Case',
+                description: 'The lower chassis carries the board’s authority: a heavier chambered base that anchors the sound signature and lowers the center of gravity.',
+                specs: [
+                    ['Material', 'Aluminum + brass weight'],
+                    ['Thickness', '18 mm body depth'],
+                    ['Mount', 'Resonance-controlled cavity']
+                ]
+            }
+        ];
+
+        const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+        const smoothstep = (edge0, edge1, value) => {
+            const x = clamp((value - edge0) / (edge1 - edge0), 0, 1);
+            return x * x * (3 - 2 * x);
+        };
+
+        class KeyboardStoryPage {
+            constructor() {
+                this.canvas = document.getElementById('keyboard-canvas');
+                this.ctx = this.canvas.getContext('2d', { alpha: false, desynchronized: true });
+                this.storySection = document.getElementById('story-section');
+                this.overlayLayer = document.getElementById('overlay-layer');
+                this.progressFill = document.getElementById('progress-fill');
+                this.loadingScreen = document.getElementById('loading-screen');
+                this.loadingFill = document.getElementById('loading-fill');
+                this.loadingBatch = document.getElementById('loading-batch');
+                this.loadingProgress = document.getElementById('loading-progress');
+
+                this.video = document.createElement('video');
+                this.video.src = 'video.mp4';
+                this.video.preload = 'auto';
+                this.video.muted = true;
+                this.video.playsInline = true;
+                this.video.crossOrigin = 'anonymous';
+                this.video.setAttribute('playsinline', '');
+                this.video.setAttribute('webkit-playsinline', '');
+
+                this.batchSize = 10;
+                this.frames = [];
+                this.totalFrames = 0;
+                this.offscreenCanvas = document.createElement('canvas');
+                this.offscreenCtx = this.offscreenCanvas.getContext('2d', { alpha: false });
+                this.backdropCanvas = document.createElement('canvas');
+                this.backdropCtx = this.backdropCanvas.getContext('2d', { alpha: false });
+                this.cardNodes = new Map();
+
+                this.metrics = {
+                    pageMax: 1,
+                    storyStart: 0,
+                    storySpan: 1
+                };
+
+                this.state = {
+                    pageProgress: 0,
+                    storyProgress: 0
+                };
+
+                this.visualState = {
+                    pageProgress: 0,
+                    storyProgress: 0,
+                    frameIndex: 0,
+                    frameValue: 0
+                };
+
+                this.renderState = {
+                    pageProgress: -1,
+                    storyProgress: -1,
+                    frameIndex: -1,
+                    frameValue: -1
+                };
+
+                this.smoothing = {
+                    page: 0.12,
+                    story: 0.085,
+                    frames: 0.18
+                };
+
+                this.smoothWheel = {
+                    enabled: !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+                    current: window.scrollY || 0,
+                    target: window.scrollY || 0,
+                    ease: 0.044,
+                    wheelFactor: 0.78,
+                    keyStep: 84,
+                    pageStepFactor: 0.76,
+                    settleThreshold: 0.18
+                };
+
+                this.ready = false;
+                this.needsRedraw = true;
+
+                this.handleScroll = this.handleScroll.bind(this);
+                this.handleResize = this.handleResize.bind(this);
+                this.handleWheel = this.handleWheel.bind(this);
+                this.handleKeydown = this.handleKeydown.bind(this);
+                this.render = this.render.bind(this);
+            }
+
+            async init() {
+                this.buildCards();
+                this.handleResize();
+                this.handleScroll();
+
+                window.addEventListener('scroll', this.handleScroll, { passive: true });
+                window.addEventListener('resize', this.handleResize, { passive: true });
+                if (this.smoothWheel.enabled) {
+                    window.addEventListener('wheel', this.handleWheel, { passive: false, capture: true });
+                    window.addEventListener('keydown', this.handleKeydown, { passive: false });
+                }
+
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(() => this.handleResize());
+                }
+
+                requestAnimationFrame(this.render);
+
+                try {
+                    await this.preloadFrames();
+                } catch (error) {
+                    console.error('Video frame extraction failed, using procedural fallback.', error);
+                    this.createFallbackFrames();
+                }
+
+                this.visualState.pageProgress = this.state.pageProgress;
+                this.visualState.storyProgress = this.state.storyProgress;
+                this.visualState.frameIndex = this.totalFrames > 1
+                    ? Math.round(this.visualState.storyProgress * (this.totalFrames - 1))
+                    : 0;
+                this.visualState.frameValue = this.visualState.frameIndex;
+
+                this.ready = true;
+                this.loadingScreen.classList.add('is-hidden');
+                this.needsRedraw = true;
+            }
+
+            buildCards() {
+                CARD_DATA.forEach((card) => {
+                    const article = document.createElement('article');
+                    article.className = 'overlay-card';
+                    article.dataset.side = card.side;
+                    article.style.top = card.top;
+                    article.innerHTML = `
+                        <p class="overlay-card__kicker">${card.kicker}</p>
+                        <h3>${card.title}</h3>
+                        <p>${card.description}</p>
+                        <div class="overlay-card__specs">
+                            ${card.specs.map(([label, value]) => `
+                                <div class="overlay-card__row">
+                                    <span>${label}</span>
+                                    <span>${value}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    this.overlayLayer.appendChild(article);
+                    this.cardNodes.set(card.id, article);
+                });
+            }
+
+            handleResize() {
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                const rect = this.canvas.getBoundingClientRect();
+                const width = Math.max(1, Math.round(rect.width * dpr));
+                const height = Math.max(1, Math.round(rect.height * dpr));
+
+                if (this.canvas.width !== width || this.canvas.height !== height) {
+                    this.canvas.width = width;
+                    this.canvas.height = height;
+                    this.ctx.imageSmoothingEnabled = true;
+                    this.ctx.imageSmoothingQuality = 'high';
+                    this.prepareBackdrop(width, height);
+                    this.needsRedraw = true;
+                }
+
+                this.metrics.pageMax = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+                this.metrics.storyStart = this.storySection.offsetTop;
+                this.metrics.storySpan = Math.max(this.storySection.offsetHeight - window.innerHeight, 1);
+
+                this.syncSmoothWheel();
+                this.handleScroll();
+            }
+
+            handleScroll() {
+                const scrollY = window.scrollY || window.pageYOffset || 0;
+                this.state.pageProgress = clamp(scrollY / this.metrics.pageMax, 0, 1);
+                this.state.storyProgress = clamp(
+                    (scrollY - this.metrics.storyStart) / this.metrics.storySpan,
+                    0,
+                    1
+                );
+
+                if (this.smoothWheel.enabled) {
+                    this.smoothWheel.current = scrollY;
+
+                    if (!this.isSmoothWheelActive()) {
+                        this.smoothWheel.target = scrollY;
+                    }
+                }
+            }
+
+            handleWheel(event) {
+                if (!this.smoothWheel.enabled || event.ctrlKey) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const multiplier = event.deltaMode === 1
+                    ? 18
+                    : event.deltaMode === 2
+                        ? window.innerHeight
+                        : 1;
+                const delta = event.deltaY * multiplier * this.smoothWheel.wheelFactor;
+                this.queueSmoothScroll(delta);
+            }
+
+            handleKeydown(event) {
+                if (!this.smoothWheel.enabled) {
+                    return;
+                }
+
+                const targetTag = event.target && event.target.tagName ? event.target.tagName.toLowerCase() : '';
+                const isEditable = targetTag === 'input' ||
+                    targetTag === 'textarea' ||
+                    targetTag === 'select' ||
+                    event.target?.isContentEditable;
+
+                if (isEditable || event.metaKey || event.ctrlKey || event.altKey) {
+                    return;
+                }
+
+                let delta = 0;
+                const viewport = window.innerHeight;
+
+                if (event.key === 'ArrowDown') delta = this.smoothWheel.keyStep;
+                if (event.key === 'ArrowUp') delta = -this.smoothWheel.keyStep;
+                if (event.key === 'PageDown' || (event.key === ' ' && !event.shiftKey)) {
+                    delta = viewport * this.smoothWheel.pageStepFactor;
+                }
+                if (event.key === 'PageUp' || (event.key === ' ' && event.shiftKey)) {
+                    delta = viewport * -this.smoothWheel.pageStepFactor;
+                }
+
+                if (event.key === 'Home') {
+                    event.preventDefault();
+                    this.smoothWheel.target = 0;
+                    return;
+                }
+
+                if (event.key === 'End') {
+                    event.preventDefault();
+                    this.smoothWheel.target = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+                    return;
+                }
+
+                if (!delta) {
+                    return;
+                }
+
+                event.preventDefault();
+                this.queueSmoothScroll(delta);
+            }
+
+            queueSmoothScroll(delta) {
+                const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+                this.smoothWheel.target = clamp(this.smoothWheel.target + delta, 0, maxScroll);
+            }
+
+            async preloadFrames() {
+                await this.waitForMetadata();
+
+                const maxWidth = Math.min(1180, Math.max(900, Math.round(window.innerWidth * 1.05)));
+                const scale = Math.min(1, maxWidth / this.video.videoWidth);
+
+                this.offscreenCanvas.width = Math.max(1, Math.round(this.video.videoWidth * scale));
+                this.offscreenCanvas.height = Math.max(1, Math.round(this.video.videoHeight * scale));
+                this.offscreenCtx.imageSmoothingEnabled = true;
+                this.offscreenCtx.imageSmoothingQuality = 'high';
+
+                const desiredFrames = Math.round(this.video.duration * 36);
+                this.totalFrames = clamp(Math.ceil(desiredFrames / this.batchSize) * this.batchSize, 100, 180);
+
+                const totalBatches = Math.ceil(this.totalFrames / this.batchSize);
+                this.updateLoading(0, totalBatches, 0);
+
+                for (let batchStart = 0; batchStart < this.totalFrames; batchStart += this.batchSize) {
+                    const batchIndex = Math.floor(batchStart / this.batchSize) + 1;
+                    const batchEnd = Math.min(batchStart + this.batchSize, this.totalFrames);
+
+                    for (let frameIndex = batchStart; frameIndex < batchEnd; frameIndex += 1) {
+                        const progress = this.totalFrames === 1 ? 0 : frameIndex / (this.totalFrames - 1);
+                        const targetTime = progress * Math.max(this.video.duration - 0.001, 0);
+
+                        await this.seekVideo(targetTime);
+                        this.offscreenCtx.clearRect(0, 0, this.offscreenCanvas.width, this.offscreenCanvas.height);
+                        this.offscreenCtx.drawImage(
+                            this.video,
+                            0,
+                            0,
+                            this.offscreenCanvas.width,
+                            this.offscreenCanvas.height
+                        );
+
+                        if (window.createImageBitmap) {
+                            this.frames[frameIndex] = await createImageBitmap(this.offscreenCanvas);
+                        } else {
+                            const clone = document.createElement('canvas');
+                            clone.width = this.offscreenCanvas.width;
+                            clone.height = this.offscreenCanvas.height;
+                            clone.getContext('2d').drawImage(this.offscreenCanvas, 0, 0);
+                            this.frames[frameIndex] = clone;
+                        }
+
+                        this.updateLoading(
+                            batchIndex,
+                            totalBatches,
+                            (frameIndex + 1) / this.totalFrames
+                        );
+                    }
+                }
+
+                this.visualState.frameIndex = 0;
+                this.visualState.frameValue = 0;
+            }
+
+            waitForMetadata() {
+                if (this.video.readyState >= 1 && Number.isFinite(this.video.duration)) {
+                    return Promise.resolve();
+                }
+
+                return new Promise((resolve, reject) => {
+                    const onLoaded = () => {
+                        cleanup();
+                        resolve();
+                    };
+                    const onError = () => {
+                        cleanup();
+                        reject(new Error('Unable to load video metadata.'));
+                    };
+                    const cleanup = () => {
+                        this.video.removeEventListener('loadedmetadata', onLoaded);
+                        this.video.removeEventListener('error', onError);
+                    };
+
+                    this.video.addEventListener('loadedmetadata', onLoaded, { once: true });
+                    this.video.addEventListener('error', onError, { once: true });
+                    this.video.load();
+                });
+            }
+
+            seekVideo(time) {
+                const safeTime = clamp(time, 0, Math.max(this.video.duration - 0.001, 0));
+
+                if (Math.abs(this.video.currentTime - safeTime) < 0.0005) {
+                    return new Promise((resolve) => requestAnimationFrame(resolve));
+                }
+
+                return new Promise((resolve, reject) => {
+                    const onSeeked = () => {
+                        cleanup();
+                        requestAnimationFrame(() => resolve());
+                    };
+                    const onError = () => {
+                        cleanup();
+                        reject(new Error('Video seek failed.'));
+                    };
+                    const cleanup = () => {
+                        this.video.removeEventListener('seeked', onSeeked);
+                        this.video.removeEventListener('error', onError);
+                    };
+
+                    this.video.addEventListener('seeked', onSeeked, { once: true });
+                    this.video.addEventListener('error', onError, { once: true });
+
+                    if (typeof this.video.fastSeek === 'function') {
+                        this.video.fastSeek(safeTime);
+                    } else {
+                        this.video.currentTime = safeTime;
+                    }
+                });
+            }
+
+            updateLoading(batch, totalBatches, progress) {
+                this.loadingFill.style.transform = `scaleX(${progress.toFixed(4)})`;
+                this.loadingBatch.textContent = `Batch ${String(batch).padStart(2, '0')} / ${String(totalBatches).padStart(2, '0')}`;
+                this.loadingProgress.textContent = `${Math.round(progress * 100)}%`;
+            }
+
+            createFallbackFrames() {
+                this.totalFrames = 60;
+                this.frames = [];
+
+                for (let index = 0; index < this.totalFrames; index += 1) {
+                    const progress = index / (this.totalFrames - 1);
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 1440;
+                    canvas.height = 900;
+                    const ctx = canvas.getContext('2d');
+
+                    this.drawFallbackFrame(ctx, canvas.width, canvas.height, progress);
+                    this.frames.push(canvas);
+                }
+            }
+
+            drawFallbackFrame(ctx, width, height, progress) {
+                ctx.fillStyle = '#080808';
+                ctx.fillRect(0, 0, width, height);
+
+                const baseX = width * 0.5;
+                const baseY = height * 0.56;
+                const keyboardWidth = width * 0.54;
+                const keyboardHeight = height * 0.18;
+                const radius = 22;
+
+                const layers = [
+                    { color: '#d8bf8b', shadow: 'rgba(201, 169, 110, 0.18)', height: keyboardHeight * 0.18, lift: 0.22, start: 0.08, end: 0.24 },
+                    { color: '#b89b69', shadow: 'rgba(201, 169, 110, 0.12)', height: keyboardHeight * 0.14, lift: 0.17, start: 0.24, end: 0.42 },
+                    { color: '#7a7a7a', shadow: 'rgba(255, 255, 255, 0.08)', height: keyboardHeight * 0.12, lift: 0.12, start: 0.42, end: 0.6 },
+                    { color: '#4c4c4c', shadow: 'rgba(255, 255, 255, 0.05)', height: keyboardHeight * 0.1, lift: 0.08, start: 0.6, end: 0.78 },
+                    { color: '#202020', shadow: 'rgba(0, 0, 0, 0.22)', height: keyboardHeight * 0.2, lift: 0.02, start: 0.78, end: 0.98 }
+                ];
+
+                layers.forEach((layer, layerIndex) => {
+                    const reveal = smoothstep(layer.start, layer.end, progress);
+                    const lift = reveal * height * layer.lift;
+                    const layerY = baseY - lift + layerIndex * 16;
+
+                    ctx.save();
+                    ctx.shadowColor = layer.shadow;
+                    ctx.shadowBlur = 36;
+                    ctx.fillStyle = layer.color;
+                    this.roundRect(
+                        ctx,
+                        baseX - keyboardWidth / 2,
+                        layerY - keyboardHeight / 2,
+                        keyboardWidth,
+                        layer.height,
+                        radius
+                    );
+                    ctx.fill();
+                    ctx.restore();
+                });
+
+                ctx.strokeStyle = 'rgba(201, 169, 110, 0.18)';
+                ctx.lineWidth = 1;
+                for (let x = 0; x < width; x += 72) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, height);
+                    ctx.stroke();
+                }
+            }
+
+            roundRect(ctx, x, y, width, height, radius) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.arcTo(x + width, y, x + width, y + height, radius);
+                ctx.arcTo(x + width, y + height, x, y + height, radius);
+                ctx.arcTo(x, y + height, x, y, radius);
+                ctx.arcTo(x, y, x + width, y, radius);
+                ctx.closePath();
+            }
+
+            render() {
+                this.updateSmoothWheel();
+
+                if (this.ready) {
+                    const nextPageProgress = this.approach(
+                        this.visualState.pageProgress,
+                        this.state.pageProgress,
+                        this.smoothing.page
+                    );
+                    const nextStoryProgress = this.approach(
+                        this.visualState.storyProgress,
+                        this.state.storyProgress,
+                        this.smoothing.story
+                    );
+
+                    const pageMoved = Math.abs(nextPageProgress - this.visualState.pageProgress) > 0.00001;
+                    const storyMoved = Math.abs(nextStoryProgress - this.visualState.storyProgress) > 0.00001;
+
+                    this.visualState.pageProgress = nextPageProgress;
+                    this.visualState.storyProgress = nextStoryProgress;
+
+                    const targetFrameValue = this.totalFrames > 1
+                        ? this.visualState.storyProgress * (this.totalFrames - 1)
+                        : 0;
+                    const nextFrameValue = this.approach(
+                        this.visualState.frameValue,
+                        targetFrameValue,
+                        this.smoothing.frames
+                    );
+                    const nextFrameIndex = Math.round(nextFrameValue);
+
+                    this.visualState.frameValue = nextFrameValue;
+
+                    if (
+                        this.renderState.pageProgress < 0 ||
+                        (pageMoved && Math.abs(this.visualState.pageProgress - this.renderState.pageProgress) > 0.0002)
+                    ) {
+                        this.progressFill.style.transform = `scaleX(${this.visualState.pageProgress.toFixed(5)})`;
+                        this.renderState.pageProgress = this.visualState.pageProgress;
+                    }
+
+                    if (
+                        this.renderState.storyProgress < 0 ||
+                        (storyMoved && Math.abs(this.visualState.storyProgress - this.renderState.storyProgress) > 0.0002)
+                    ) {
+                        this.renderCards(this.visualState.storyProgress);
+                        this.renderState.storyProgress = this.visualState.storyProgress;
+                    }
+
+                    if (
+                        this.needsRedraw ||
+                        nextFrameIndex !== this.renderState.frameIndex ||
+                        Math.abs(nextFrameValue - this.renderState.frameValue) > 0.035
+                    ) {
+                        this.visualState.frameIndex = nextFrameIndex;
+                        this.drawFrame(nextFrameValue);
+                        this.renderState.frameIndex = this.visualState.frameIndex;
+                        this.renderState.frameValue = nextFrameValue;
+                        this.needsRedraw = false;
+                    }
+                }
+
+                requestAnimationFrame(this.render);
+            }
+
+            syncSmoothWheel() {
+                if (!this.smoothWheel.enabled) {
+                    return;
+                }
+
+                const scrollY = window.scrollY || window.pageYOffset || 0;
+                this.smoothWheel.current = scrollY;
+                this.smoothWheel.target = scrollY;
+            }
+
+            isSmoothWheelActive() {
+                return this.smoothWheel.enabled &&
+                    Math.abs(this.smoothWheel.target - this.smoothWheel.current) > 0.6;
+            }
+
+            updateSmoothWheel() {
+                if (!this.smoothWheel.enabled) {
+                    return;
+                }
+
+                const delta = this.smoothWheel.target - this.smoothWheel.current;
+
+                if (Math.abs(delta) < this.smoothWheel.settleThreshold) {
+                    if (Math.abs(delta) > 0) {
+                        this.smoothWheel.current = this.smoothWheel.target;
+                        window.scrollTo(0, this.smoothWheel.current);
+                    }
+
+                    return;
+                }
+
+                this.smoothWheel.current += delta * this.smoothWheel.ease;
+                window.scrollTo(0, this.smoothWheel.current);
+            }
+
+            approach(current, target, ease) {
+                if (Math.abs(target - current) < 0.0001) {
+                    return target;
+                }
+
+                return current + (target - current) * ease;
+            }
+
+            prepareBackdrop(width, height) {
+                this.backdropCanvas.width = width;
+                this.backdropCanvas.height = height;
+
+                const ctx = this.backdropCtx;
+                ctx.clearRect(0, 0, width, height);
+                ctx.fillStyle = '#080808';
+                ctx.fillRect(0, 0, width, height);
+
+                ctx.strokeStyle = 'rgba(201, 169, 110, 0.055)';
+                ctx.lineWidth = 1;
+
+                const spacing = Math.max(52, Math.round(width / 22));
+                for (let x = 0; x <= width; x += spacing) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, height);
+                    ctx.stroke();
+                }
+
+                for (let y = 0; y <= height; y += spacing) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(width, y);
+                    ctx.stroke();
+                }
+            }
+
+            renderCards(progress) {
+                const fade = 0.06;
+
+                CARD_DATA.forEach((card) => {
+                    const node = this.cardNodes.get(card.id);
+                    const opacity = this.windowOpacity(progress, card.range[0], card.range[1], fade);
+                    const direction = card.side === 'left' ? -1 : 1;
+                    const shift = (1 - opacity) * 54 * direction;
+                    const drift = (1 - opacity) * 18;
+
+                    node.style.setProperty('--card-opacity', opacity.toFixed(3));
+                    node.style.setProperty('--card-shift', `${shift.toFixed(1)}px`);
+                    node.style.setProperty('--card-drift', `${drift.toFixed(1)}px`);
+                });
+            }
+
+            windowOpacity(progress, start, end, fade) {
+                const fadeIn = smoothstep(start, start + fade, progress);
+                const fadeOut = 1 - smoothstep(end - fade, end, progress);
+                return clamp(Math.min(fadeIn, fadeOut), 0, 1);
+            }
+
+            drawFrame(frameValue) {
+                if (!this.frames.length) {
+                    return;
+                }
+
+                const ctx = this.ctx;
+                const width = this.canvas.width;
+                const height = this.canvas.height;
+                const lowerIndex = Math.max(0, Math.min(Math.floor(frameValue), this.frames.length - 1));
+                const upperIndex = Math.min(lowerIndex + 1, this.frames.length - 1);
+                const blend = Math.min(1, Math.max(0, frameValue - lowerIndex));
+                const lowerFrame = this.frames[lowerIndex];
+                const upperFrame = this.frames[upperIndex];
+                const referenceFrame = lowerFrame || upperFrame;
+
+                if (!referenceFrame) {
+                    return;
+                }
+
+                const frameWidth = referenceFrame.width || referenceFrame.naturalWidth || referenceFrame.videoWidth;
+                const frameHeight = referenceFrame.height || referenceFrame.naturalHeight || referenceFrame.videoHeight;
+
+                ctx.clearRect(0, 0, width, height);
+                ctx.drawImage(this.backdropCanvas, 0, 0);
+                this.drawCanvasAtmosphere(width, height, frameValue);
+
+                const frameBox = this.getFrameBox(width, height);
+                const mediaRect = this.getContainedMediaRect(frameWidth, frameHeight, frameBox);
+
+                if (lowerFrame) {
+                    ctx.save();
+                    ctx.globalAlpha = 1 - blend;
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.28)';
+                    ctx.shadowBlur = Math.round(width * 0.02);
+                    ctx.drawImage(
+                        lowerFrame,
+                        0,
+                        0,
+                        frameWidth,
+                        frameHeight,
+                        mediaRect.dx,
+                        mediaRect.dy,
+                        mediaRect.dw,
+                        mediaRect.dh
+                    );
+                    ctx.restore();
+                }
+
+                if (upperFrame && upperIndex !== lowerIndex && blend > 0.001) {
+                    ctx.save();
+                    ctx.globalAlpha = blend;
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.28)';
+                    ctx.shadowBlur = Math.round(width * 0.02);
+                    ctx.drawImage(
+                        upperFrame,
+                        0,
+                        0,
+                        frameWidth,
+                        frameHeight,
+                        mediaRect.dx,
+                        mediaRect.dy,
+                        mediaRect.dw,
+                        mediaRect.dh
+                    );
+                    ctx.restore();
+                }
+            }
+
+            getFrameBox(width, height) {
+                const sideInset = width * 0.14;
+                const topInset = height * 0.04;
+                const bottomInset = height * 0.04;
+                const dw = width - sideInset * 2;
+                const dh = height - topInset - bottomInset;
+
+                return {
+                    dx: sideInset,
+                    dy: topInset,
+                    dw,
+                    dh
+                };
+            }
+
+            getContainedMediaRect(frameWidth, frameHeight, frameBox) {
+                const scale = Math.min(frameBox.dw / frameWidth, frameBox.dh / frameHeight);
+                const dw = frameWidth * scale;
+                const dh = frameHeight * scale;
+
+                return {
+                    dx: frameBox.dx + (frameBox.dw - dw) / 2,
+                    dy: frameBox.dy + (frameBox.dh - dh) / 2,
+                    dw,
+                    dh
+                };
+            }
+
+            drawCanvasAtmosphere(width, height, frameValue) {
+                const ctx = this.ctx;
+                const progress = this.totalFrames > 1 ? frameValue / (this.totalFrames - 1) : 0;
+                const glow = 0.08 + progress * 0.08;
+
+                const radial = ctx.createRadialGradient(
+                    width * 0.5,
+                    height * 0.46,
+                    width * 0.02,
+                    width * 0.5,
+                    height * 0.52,
+                    width * 0.42
+                );
+                radial.addColorStop(0, `rgba(201, 169, 110, ${glow})`);
+                radial.addColorStop(0.5, 'rgba(201, 169, 110, 0.03)');
+                radial.addColorStop(1, 'rgba(8, 8, 8, 0)');
+                ctx.fillStyle = radial;
+                ctx.fillRect(0, 0, width, height);
+            }
+
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const page = new KeyboardStoryPage();
+            page.init();
+        });
+    </script>
+</body>
+</html>
